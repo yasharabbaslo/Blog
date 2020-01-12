@@ -1,0 +1,74 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+
+{% block title %}Sensive Blog - Home{% endblock title %}
+
+{% block content %}
+<main class="site-main">
+  <!--================Hero Banner start =================-->
+  <section class="mb-30px">
+    <div class="container">
+      <div class="hero-banner">
+        <div class="hero-banner__content">
+          <h3>Tours & Travels</h3>
+          <h1>Amazing Places on earth</h1>
+          <h4>December 12, 2018</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================Hero Banner end =================-->
+
+
+  <!--================ Start Blog Post Area =================-->
+  <section class="blog-post-area section-margin mt-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+
+          {% for post in posts %}          
+            <div class="single-recent-blog-post">
+              <div class="thumb">
+                <img class="img-fluid" src="{{ post.image.url }}" alt="">
+                <ul class="thumb-info">
+                  <li><a href="#"><i class="ti-user"></i>{{ post.author }}</a></li>
+                  <li><a href="#"><i class="ti-notepad"></i>{{ post.publish }}</a></li>
+                  <li><a href="#"><i class="ti-themify-favicon"></i>{{ post.comment_count }} Comment{{ total_comments|pluralize }}</a></li>
+                  <!-- <li><a href="#"><i class="ti-eye"></i>{{ post.views }}</a></li> -->
+                </ul>
+              </div>
+              <div class="details mt-20">
+                <a href="{{ post.get_absolute_url }}">
+                  <h3>{{ post.title }}</h3>
+                </a>
+                {% if post.tags %}
+                  <p class="tag-list-inline">Tag{{ post.tags.all.count|pluralize }}: 
+                    {% for tag in post.tags.all %}
+                      <a href="{% url 'post_list_by_tag' tag.slug %}">
+                        {{ tag.name }}
+                      </a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}                 
+                  </p>
+                {% endif %}
+                <p>{{ post.body|markdown|truncatewords_html:30 }}</p>
+                <a class="button" href="{{ post.get_absolute_url }}">Read More <i class="ti-arrow-right"></i></a>
+              </div>
+            </div>
+          {% endfor %}
+          
+          {% if posts.paginator.num_pages > 1 %}
+            {% include 'blog/includes/pagination.html' with page=posts %}
+          {% endif %}        
+
+        </div>
+        <!-- Start Blog Post Siddebar -->
+        {% include 'blog/includes/sidebar.html' %}
+        <!-- End Blog Post Siddebar -->
+      </div>
+    </div>
+  </section>
+  <!--================ End Blog Post Area =================-->
+</main>
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% load blog_tags %}
+
+
+<div class="col-lg-4 sidebar-widgets">
+  <div class="widget-wrap">
+
+    <div class="single-sidebar-widget newsletter-widget">
+      <h4 class="single-sidebar-widget__title">Newsletter</h4>
+      <form action="." method="post">{% csrf_token %}
+        <input type="hidden" name="form_type" value="newsletter">
+        <div class="form-group mt-30">
+          <div class="col-autos">
+            {{ newsletter_form.email }}
+          </div>
+        </div>
+        <button class="bbtns d-block mt-20 w-100" type="submit">Subcribe</button>
+    </form>
+    </div>
+
+    <div class="single-sidebar-widget post-category-widget">
+      <h4 class="single-sidebar-widget__title">Category</h4>
+      <!-- Defined in templatetags -->
+      {% show_total_tags %}
+    </div>
+
+    <div class="single-sidebar-widget popular-post-widget">
+      <h4 class="single-sidebar-widget__title">Popular Post</h4> 
+      <!-- Defined in templatetags -->
+      {% show_popular_posts %}
+    </div>
+
+  </div>
+</div>

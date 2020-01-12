@@ -1,0 +1,12 @@
+{% load blog_tags %}
+
+<ul class="cat-list mt-20">
+    {% for tag in total_tags %}
+      <li>
+        <a href="{% url 'post_list_by_tag' tag.slug %}" class="d-flex justify-content-between">
+          <p>{{ tag.name }}</p>
+          <p>{% each_tag_count tag %}</p>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>

@@ -1,0 +1,19 @@
+
+<div class="popular-post-list">
+  {% for post in popular_posts %}
+    <div class="single-post-list">
+      <div class="thumb">
+        <img class="card-img rounded-0" src="{{ post.image.url }}" alt="">
+        <ul class="thumb-info">
+          <li><a href="#">{{ post.author }}</a></li>
+          <li><a href="#">{{ post.publish|date:"d M y" }}</a></li>
+        </ul>
+      </div>
+      <div class="details mt-20">
+        <a href="{{ post.get_absolute_url }}">
+          <h6>{{ post.title }}</h6>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
