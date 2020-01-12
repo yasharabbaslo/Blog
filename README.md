@@ -8,6 +8,6 @@ Template link: https://colorlib.com/wp/template/sensive/
 * Listing posts
 * Pagination
 * Post detail
-* comment for posts
+* Comment for posts
 * Post tags and post listing by tags
 * Every post's veiwed counts
